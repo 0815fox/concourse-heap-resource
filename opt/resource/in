@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+import json
+import sys
+from distutils.dir_util import copy_tree
+
+# get a version of the resource
+
+def get(destination):
+    request = json.load(sys.stdin)
+    version = request['version']['version']
+    path = request['source']['heap'] + '/'
+    copy_tree(path + str(version), destination)
+    print(json.dumps({
+        'version': {'version': version},
+        'metadata': []
+    }))
+
+
+if __name__ == '__main__':
+    get(sys.argv[1])

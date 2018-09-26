@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+from common import get_newest
+
+import json
+import sys
+import shutil
+import os
+
+# put a new version of the resource
+
+def put(source):
+    request = json.load(sys.stdin)
+    path = request['source']['heap'] + '/'
+    new_version = get_newest(path) + 1
+    shutil.copytree(source, path + str(new_version))
+    print(json.dumps({
+        'version': {'version': new_version},
+        'metadata': []
+    }))
+
+
+if __name__ == '__main__':
+    put(sys.argv[1])
