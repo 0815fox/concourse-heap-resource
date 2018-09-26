@@ -65,9 +65,9 @@ Using in job configuration:
 jobs:
 - name: job1
   ... produce some cool data
-  - put: heap
+  - put: heap1
 - name: job2
-  get: heap
+  get: heap1
   trigger: true
   ... do something cool with the data.
 ```
