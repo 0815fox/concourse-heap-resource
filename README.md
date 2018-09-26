@@ -37,3 +37,37 @@ This takes your data for later retrieval
 
 *None.*
 
+## Example
+
+Adding the resource to your project:
+
+``` yaml
+resource_types:
+- name: heap
+  type: docker-image
+  source:
+    repository: 0815fox/concourse-heap-resource
+```
+
+Resource configuration:
+
+``` yaml
+resources:
+- name: heap1
+  type: heap
+  source:
+    heap: heap1
+```
+
+Using in job configuration:
+
+``` yaml
+jobs:
+- name: job1
+  ... produce some cool data
+  - put: heap
+- name: job2
+  get: heap
+  trigger: true
+  ... do something cool with the data.
+```
