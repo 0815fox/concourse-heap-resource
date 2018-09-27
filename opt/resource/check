@@ -15,7 +15,7 @@ def check():
     path = request['source']['heap'] + '/'
     newest_version = get_newest(path) + 1
     versions = []
-    for v in xrange(version, newest_version + 1):
+    for v in range(version, newest_version + 1):
         versions.append({ 'version' : str(v)})
     print(json.dumps(versions))
 
