@@ -2,6 +2,7 @@
 
 import json
 import sys
+import os
 from distutils.dir_util import copy_tree
 
 # get a version of the resource
@@ -9,8 +10,9 @@ from distutils.dir_util import copy_tree
 def get(destination):
     request = json.load(sys.stdin)
     version = request['version']['version']
-    path = request['source']['heap'] + '/'
-    copy_tree(path + str(version), destination)
+    path = request['source']['heap'] + '/' + str(version)
+    if os.path.exists(path):
+        copy_tree(path, destination)
     print(json.dumps({
         'version': {'version': str(version)},
         'metadata': []
