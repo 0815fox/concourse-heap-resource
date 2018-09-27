@@ -39,35 +39,48 @@ This takes your data for later retrieval
 
 ## Example
 
-Adding the resource to your project:
-
 ``` yaml
 resource_types:
 - name: heap
   type: docker-image
   source:
     repository: 0815fox/concourse-heap-resource
-```
-
-Resource configuration:
-
-``` yaml
 resources:
 - name: heap1
   type: heap
   source:
     heap: heap1
-```
-
-Using in job configuration:
-
-``` yaml
 jobs:
-- name: job1
-  ... produce some cool data
+- name: put-hello-world-job
+  plan:
+  - task: put-hello-world
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: alpine}
+      outputs:
+      - name: heap1
+      run:
+        path: touch
+        args: 
+        - heap1/hello-world
   - put: heap1
-- name: job2
-  get: heap1
-  trigger: true
-  ... do something cool with the data.
+- name: get-hello-world-job
+  plan:
+  - get: heap1
+    trigger: true
+    passed: [put-hello-world-job]
+  - task: get-hello-world
+    config:
+      platform: linux
+      inputs:
+      - name: heap1
+      image_resource:
+        type: docker-image
+        source: {repository: alpine}
+      run:
+        path: ls
+        args: 
+        - heap1
 ```
