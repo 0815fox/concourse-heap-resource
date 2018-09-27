@@ -1,2 +1,2 @@
-FROM alpine:3.8
+FROM python:3-alpine
 COPY opt /opt
