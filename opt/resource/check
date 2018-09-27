@@ -17,7 +17,6 @@ def check():
     versions = []
     for v in range(int(version), newest_version + 1):
         versions.append({ 'version' : str(v)})
-    print(json.dumps(versions))
 
 if __name__ == '__main__':
     check()

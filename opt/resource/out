@@ -13,7 +13,6 @@ def put(source):
     request = json.load(sys.stdin)
     path = request['source']['heap'] + '/'
     new_version = get_newest(path) + 1
-    print(source + "," + path + str(new_version))
     shutil.copytree(source, path + str(new_version))
     print(json.dumps({
         'version': {'version': str(new_version)},
