@@ -12,7 +12,7 @@ def get(destination):
     path = request['source']['heap'] + '/'
     copy_tree(path + str(version), destination)
     print(json.dumps({
-        'version': {'version': version},
+        'version': {'version': str(version)},
         'metadata': []
     }))
 

@@ -16,7 +16,7 @@ def check():
     newest_version = get_newest(path) + 1
     versions = []
     for v in xrange(version, newest_version + 1):
-        versions.append({ 'version' : v})
+        versions.append({ 'version' : str(v)})
     print(json.dumps(versions))
 
 if __name__ == '__main__':

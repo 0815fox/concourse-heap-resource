@@ -15,7 +15,7 @@ def put(source):
     new_version = get_newest(path) + 1
     shutil.copytree(source, path + str(new_version))
     print(json.dumps({
-        'version': {'version': new_version},
+        'version': {'version': str(new_version)},
         'metadata': []
     }))
 
